@@ -19,12 +19,19 @@ class Adherent extends Model
 
     public function personne()
     {
-        return $this->belongsTo(Personne::class, 'id', 'id');
+        return $this->belongsTo(
+            Personne::class,
+            'id',
+            'id'
+        );
     }
 
     public function responsable()
     {
-        return $this->belongsTo(Responsable::class);
+        return $this->belongsTo(
+            Responsable::class,
+            'responsable_id'
+        );
     }
 
     public function abonnement()
@@ -34,6 +41,11 @@ class Adherent extends Model
 
     public function activite()
     {
-        return $this->belongsToMany(Activite::class, 'participer');
+        return $this->belongsToMany(
+            Activite::class,
+            'participer',
+            'adherent_id',
+            'activite_id'
+        );
     }
 }

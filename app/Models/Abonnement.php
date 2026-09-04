@@ -24,16 +24,16 @@ class Abonnement extends Model
 
     public function responsable()
     {
-        return $this->belongsTo(Responsable::class);
+        return $this->belongsTo(Responsable::class, 'responsable_id');
     }
 
     public function adherent()
     {
-        return $this->belongsTo(Adherent::class);
+        return $this->belongsTo(Adherent::class, 'adherent_id');
     }
 
     public function type_abonnement()
     {
-        return $this->belongsTo(Type_Abonnement::class);
+        return $this->belongsTo(Type_Abonnement::class, 'typeAbonnement_id');
     }
 }

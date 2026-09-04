@@ -12,7 +12,7 @@
 
 <body>
 
-    <div class="flex min-h-screen bg-[#121212]">
+    <div class="flex min-h-screen bg-[#121212] ">
 
         {{-- Sidebar --}}
         <aside class="w-60 shrink-0 fixed left-0 top-0 z-50
@@ -22,7 +22,7 @@
                border border-[#212427]
                rounded-md
                bg-[#212427]
-
+               
                max-xl:w-52
                max-lg:w-20
                max-md:w-16
@@ -114,7 +114,16 @@
 
                 </x-admin.admin-dashboard-links-layout>
 
-                   {{-- Plannings --}}
+                {{-- Type activities --}}
+                <x-admin.admin-dashboard-links-layout href="typeActivities" icon="category.svg"
+                    :activite="request()->is('admin/typeActivities')">
+
+                    Type Activities
+
+                </x-admin.admin-dashboard-links-layout>
+
+
+                {{-- Plannings --}}
                 <x-admin.admin-dashboard-links-layout href="plannings" icon="planning.svg"
                     :activite="request()->is('admin/plannings')">
 

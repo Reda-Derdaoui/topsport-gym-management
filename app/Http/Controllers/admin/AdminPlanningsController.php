@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Planning;
 use Illuminate\Http\Request;
 
 class AdminPlanningsController extends Controller
@@ -12,7 +13,15 @@ class AdminPlanningsController extends Controller
      */
     public function index()
     {
-        return view("admin.adminPlannings", ['pageTitle' => 'Admin | Plannings ']);
+        $palnnings = Planning::all()->last()->paginate(7);
+
+        return view(
+            "admin.adminPlannings",
+            [
+                'pageTitle' => 'Admin | Plannings ',
+                'plannings' => $palnnings
+            ]
+        );
     }
 
     /**
@@ -28,7 +37,13 @@ class AdminPlanningsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Planning::create([
+            'heure_debut' => $request->heure_debut,
+            'heure_fin' => $request->heure_fin,
+            'jour_semain' => $request->jour
+        ]);
+
+        return redirect('/admin/plannings')->with('success', 'Planning créé avec succès.');
     }
 
     /**
@@ -44,7 +59,8 @@ class AdminPlanningsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $planning = Planning::find($id);
+        return response()->json($planning);
     }
 
     /**
@@ -52,7 +68,17 @@ class AdminPlanningsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $planning = Planning::find($id);
+
+        if ($planning) {
+            $planning->update([
+                'heure_debut' => $request->planningHeureDebut,
+                'heure_fin' => $request->planningHeureFin,
+                'jour_semain' => $request->planningJour
+            ]);
+        }
+
+        return redirect('admin/plannings')->with('success', 'Planning modifié avec succès.');
     }
 
     /**
@@ -60,6 +86,12 @@ class AdminPlanningsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $planning = Planning::find($id);
+
+        if ($planning) {
+            $planning->delete();
+        }
+
+         return redirect('admin/plannings')->with('success', 'Planning suprimer avec succès.');
     }
 }

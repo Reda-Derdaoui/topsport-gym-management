@@ -361,19 +361,76 @@
                     max-md:mt-7
                     max-sm:mt-6">
 
-            <div class="mb-4">
+            <div class="flex justify-between ">
+                <div class="mb-4">
 
-                <h3 class="text-lg font-semibold text-[#F8FAFC]
-                           max-md:text-base
-                           max-sm:text-sm">
-                    Liste des responsables
-                </h3>
+                    <h3 class="text-lg font-semibold text-[#F8FAFC]
+                                       max-md:text-base
+                                       max-sm:text-sm">
+                        Liste des responsables
+                    </h3>
 
-                <p class="mt-1 text-sm text-[#71717A]
-                          max-md:text-xs">
-                    Les responsables enregistrés apparaîtront ici.
-                </p>
+                    <p class="mt-1 text-sm text-[#71717A]
+                                      max-md:text-xs">
+                        Les responsables enregistrés apparaîtront ici.
+                    </p>
 
+                </div>
+
+                <div class="flex items-center gap-3 mt-4">
+
+                    {{-- Search --}}
+                    <form method="GET" action="/admin/responsables" role="search">
+
+                        <div class="flex items-center w-72 h-11 rounded-lg
+                    bg-white dark:bg-neutral-800
+                    border border-slate-300 dark:border-neutral-700
+                    shadow-sm
+                    focus-within:ring-2 focus-within:ring-blue-500
+                    focus-within:border-blue-500">
+
+                            <label for="search" class="sr-only">Search</label>
+
+                            <input type="search" id="search" name="search" placeholder="Search responsable..."
+                                value="{{ request('search') }}" class="w-full h-full px-4 text-sm
+                       text-slate-900 dark:text-slate-50
+                       bg-transparent outline-none
+                       placeholder:text-slate-400" />
+
+                            <button type="submit" aria-label="Search" class="flex items-center justify-center
+                       w-11 h-11 shrink-0
+                       bg-blue-600 hover:bg-blue-700
+                       rounded-r-lg
+                       transition-colors duration-200
+                       cursor-pointer">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    class="w-5 h-5 fill-none stroke-white stroke-2" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <path d="m20 20-4-4"></path>
+                                </svg>
+
+                            </button>
+                        </div>
+                    </form>
+
+
+                    {{-- Cancel --}}
+                    @if(request('search'))
+                        <a href="/admin/responsables" class="inline-flex items-center justify-center
+                               h-11 px-4
+                               text-sm font-medium
+                               text-slate-700 dark:text-slate-200
+                               bg-slate-100 dark:bg-neutral-700
+                               border border-slate-300 dark:border-neutral-600
+                               rounded-lg
+                               hover:bg-slate-200 dark:hover:bg-neutral-600
+                               transition-colors duration-200">
+                            Cancel
+                        </a>
+                    @endif
+
+                </div>
             </div>
 
 

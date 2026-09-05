@@ -161,203 +161,275 @@
                 </div>
             </form>
         </div>
-    </div>
 
-    <div
-        class="max-w-270 m-auto  overflow-x-auto rounded-2xl border border-[#34383D] bg-[#1B1E21]/50 max-md:rounded-xl mt-6">
+        <div class="flex justify-between mt-4">
+            <div>
 
-        <table class="w-full min-w-125 table-fixed text-left border-collapse">
+                <h3 class="text-lg font-semibold text-[#F8FAFC]
+                           max-md:text-base
+                           max-sm:text-sm">
+                    Liste des types activites
+                </h3>
 
-            {{-- Header --}}
-            <thead class="border-b border-[#34383D] bg-[#212427]">
-                <tr>
-                    <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
-                           max-lg:px-4 max-lg:py-3
-                           max-md:text-xs">
-                        heure debut
-                    </th>
+                <p class="mt-1 text-sm text-[#71717A]
+                          max-md:text-xs">
+                    Les types activites enregistrés apparaîtront ici.
+                </p>
+            </div>
 
-                    <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
-                           max-lg:px-4 max-lg:py-3
-                           max-md:text-xs">
-                        heure fin
-                    </th>
+            <div class="flex items-center gap-3 mt-4">
 
-                    <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
-                           max-lg:px-4 max-lg:py-3
-                           max-md:text-xs">
-                        jour
-                    </th>
+                {{-- Search --}}
+                <form method="GET" action="/admin/plannings" role="search">
 
-                    <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] text-center whitespace-nowrap
-                           max-lg:px-4 max-lg:py-3
-                           max-md:text-xs">
-                        Actions
-                    </th>
-                </tr>
-            </thead>
+                    <div class="flex items-center w-72 h-11 rounded-lg
+                    bg-white dark:bg-neutral-800
+                    border border-slate-300 dark:border-neutral-700
+                    shadow-sm
+                    focus-within:ring-2 focus-within:ring-blue-500
+                    focus-within:border-blue-500">
 
-            {{-- Body --}}
-            <tbody class="divide-y divide-[#34383D]">
+                        <label for="search" class="sr-only">Search</label>
 
-                @forelse($plannings as $planning)
-                    <tr class="transition-colors duration-200 hover:bg-[#24282C]">
-                        <td
-                            class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap  max-lg:px-4 max-lg:py-3 max-md:text-xs">
-                            {{ $planning->jour_semain }}
-                        </td>
+                        <input type="search" id="search" name="search" placeholder="Search activite..."
+                            value="{{ request('search') }}" class="w-full h-full px-4 text-sm
+                       text-slate-900 dark:text-slate-50
+                       bg-transparent outline-none
+                       placeholder:text-slate-400" />
 
-                        <td
-                            class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap  max-lg:px-4 max-lg:py-3 max-md:text-xs">
-                            {{ $planning->heure_debut }}
-                        </td>
+                        <button type="submit" aria-label="Search" class="flex items-center justify-center
+                       w-11 h-11 shrink-0
+                       bg-blue-600 hover:bg-blue-700
+                       rounded-r-lg
+                       transition-colors duration-200
+                       cursor-pointer">
 
-                        <td
-                            class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap  max-lg:px-4 max-lg:py-3 max-md:text-xs">
-                            {{ $planning->heure_fin }}
-                        </td>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                class="w-5 h-5 fill-none stroke-white stroke-2" aria-hidden="true">
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="m20 20-4-4"></path>
+                            </svg>
 
-                        {{-- Actions --}}
-                        <td class="w-[30%] px-6 py-4 max-lg:px-4 max-lg:py-3">
-
-                            <div class="flex items-center justify-center gap-2">
-
-                                {{-- Edit --}}
-                                <button type="button" data-id="{{ $planning->id }}"
-                                    class="edit-planning rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
-                                    <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/edit.svg') }}"
-                                        alt="Edit">
-                                </button>
-
-                                {{-- Delete --}}
-                                <form method="POST" action="/admin/plannings/{{ $planning->id }}"
-                                    onsubmit="return confirm('Are you sure ?')">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit"
-                                        class="rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
-                                        <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/delete.svg') }}"
-                                            alt="Delete">
-                                    </button>
-                                </form>
-
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="2" class="px-6 py-12 text-center text-sm text-[#71717A]">
-                            Aucun planning trouvé.
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-    {{-- Pagination --}}
-    <div class="mt-4 flex justify-center">
-        {{ $plannings->links() }}
-    </div>
+                        </button>
+                    </div>
+                </form>
 
 
-    <!-- Planning modal -->
-    <div id="planningModal"
-        class="hidden fixed inset-0 z-50 w-full h-full items-center justify-center  bg-slate-950/60 backdrop-blur-md px-4">
-        <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
-
-            <!-- Header -->
-            <div
-                class="flex items-center justify-between border-b border-gray-200 bg-linear-to-r from-indigo-600 to-indigo-500 px-6 py-5">
-
-                <div>
-                    <h2 class="text-xl font-bold text-white">
-                        Éditer le planning
-                    </h2>
-
-                    <p class="mt-1 text-sm text-indigo-100">
-                        Modifier le planning
-                    </p>
-                </div>
-
-                <button type="button" id="closePlanningModal"
-                    class="flex h-9 w-9 items-center justify-center rounded-full text-xl text-white cursor-pointer">
-                    &times;
-                </button>
+                {{-- Cancel --}}
+                @if(request('search'))
+                    <a href="/admin/plannings" class="inline-flex items-center justify-center
+                                                       h-11 px-4
+                                                       text-sm font-medium
+                                                       text-slate-700 dark:text-slate-200
+                                                       bg-slate-100 dark:bg-neutral-700
+                                                       border border-slate-300 dark:border-neutral-600
+                                                       rounded-lg
+                                                       hover:bg-slate-200 dark:hover:bg-neutral-600
+                                                       transition-colors duration-200">
+                        Cancel
+                    </a>
+                @endif
 
             </div>
 
+        </div>
 
-            <!-- Form -->
-            <form method="POST" id="planningForm" class="p-6">
+        <div
+            class="max-w-270 m-auto  overflow-x-auto rounded-2xl border border-[#34383D] bg-[#1B1E21]/50 max-md:rounded-xl mt-6">
 
-                @csrf
-                @method('PUT')
+            <table class="w-full min-w-125 table-fixed text-left border-collapse">
 
-                <input type="hidden" id="planningId">
+                {{-- Header --}}
+                <thead class="border-b border-[#34383D] bg-[#212427]">
+                    <tr>
+                        <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                           max-lg:px-4 max-lg:py-3
+                           max-md:text-xs">
+                            heure debut
+                        </th>
 
-                <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                           max-lg:px-4 max-lg:py-3
+                           max-md:text-xs">
+                            heure fin
+                        </th>
 
-                    <div>
-                        <label for="planningJour" class="mb-2 block text-sm font-semibold text-slate-700">
+                        <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                           max-lg:px-4 max-lg:py-3
+                           max-md:text-xs">
                             jour
-                        </label>
+                        </th>
 
-                        <input type="text" id="planningJour" name="planningJour" class="w-full rounded-xl border border-slate-300 bg-slate-50
-                               px-4 py-3 text-slate-800 outline-none transition
-                               placeholder:text-slate-400
-                               focus:border-indigo-500 focus:bg-white
-                               focus:ring-2 focus:ring-indigo-500/20">
-                    </div>
+                        <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] text-center whitespace-nowrap
+                           max-lg:px-4 max-lg:py-3
+                           max-md:text-xs">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+
+                {{-- Body --}}
+                <tbody class="divide-y divide-[#34383D]">
+
+                    @forelse($plannings as $planning)
+                        <tr class="transition-colors duration-200 hover:bg-[#24282C]">
+                            <td
+                                class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap  max-lg:px-4 max-lg:py-3 max-md:text-xs">
+                                {{ $planning->jour_semain }}
+                            </td>
+
+                            <td
+                                class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap  max-lg:px-4 max-lg:py-3 max-md:text-xs">
+                                {{ $planning->heure_debut }}
+                            </td>
+
+                            <td
+                                class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap  max-lg:px-4 max-lg:py-3 max-md:text-xs">
+                                {{ $planning->heure_fin }}
+                            </td>
+
+                            {{-- Actions --}}
+                            <td class="w-[30%] px-6 py-4 max-lg:px-4 max-lg:py-3">
+
+                                <div class="flex items-center justify-center gap-2">
+
+                                    {{-- Edit --}}
+                                    <button type="button" data-id="{{ $planning->id }}"
+                                        class="edit-planning rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
+                                        <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/edit.svg') }}"
+                                            alt="Edit">
+                                    </button>
+
+                                    {{-- Delete --}}
+                                    <form method="POST" action="/admin/plannings/{{ $planning->id }}"
+                                        onsubmit="return confirm('Are you sure ?')">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                            class="rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
+                                            <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/delete.svg') }}"
+                                                alt="Delete">
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="2" class="px-6 py-12 text-center text-sm text-[#71717A]">
+                                Aucun planning trouvé.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        {{-- Pagination --}}
+        <div class="mt-4 flex justify-center">
+            {{ $plannings->links() }}
+        </div>
+
+
+        <!-- Planning modal -->
+        <div id="planningModal"
+            class="hidden fixed inset-0 z-50 w-full h-full items-center justify-center  bg-slate-950/60 backdrop-blur-md px-4">
+            <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
+
+                <!-- Header -->
+                <div
+                    class="flex items-center justify-between border-b border-gray-200 bg-linear-to-r from-indigo-600 to-indigo-500 px-6 py-5">
 
                     <div>
-                        <label for="planningHeureDebut" class="mb-2 block text-sm font-semibold text-slate-700">
-                            Heure debut
-                        </label>
+                        <h2 class="text-xl font-bold text-white">
+                            Éditer le planning
+                        </h2>
 
-                        <input type="text" id="planningHeureDebut" name="planningHeureDebut" class="w-full rounded-xl border border-slate-300 bg-slate-50
-                               px-4 py-3 text-slate-800 outline-none transition
-                               placeholder:text-slate-400
-                               focus:border-indigo-500 focus:bg-white
-                               focus:ring-2 focus:ring-indigo-500/20">
+                        <p class="mt-1 text-sm text-indigo-100">
+                            Modifier le planning
+                        </p>
                     </div>
 
-                    <div>
-                        <label for="planningHeureFin" class="mb-2 block text-sm font-semibold text-slate-700">
-                            Heure fin
-                        </label>
-
-                        <input type="text" id="planningHeureFin" name="planningHeureFin" class="w-full rounded-xl border border-slate-300 bg-slate-50
-                               px-4 py-3 text-slate-800 outline-none transition
-                               placeholder:text-slate-400
-                               focus:border-indigo-500 focus:bg-white
-                               focus:ring-2 focus:ring-indigo-500/20">
-                    </div>
-
-
+                    <button type="button" id="closePlanningModal"
+                        class="flex h-9 w-9 items-center justify-center rounded-full text-xl text-white cursor-pointer">
+                        &times;
+                    </button>
 
                 </div>
 
-                <!-- Buttons -->
-                <div class="mt-7 flex justify-end gap-3 border-t border-gray-200 pt-5">
 
-                    <button type="button"
-                        class="rounded-xl border border-slate-300 bg-white  px-5 py-2.5 text-sm font-semibold text-slate-700  transition hover:bg-slate-100">
-                        <a href="/admin/plannings">
-                            Annuler
-                        </a>
-                    </button>
+                <!-- Form -->
+                <form method="POST" id="planningForm" class="p-6">
 
-                    <button type="submit"
-                        class="rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" id="planningId">
+
+                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+                        <div>
+                            <label for="planningJour" class="mb-2 block text-sm font-semibold text-slate-700">
+                                jour
+                            </label>
+
+                            <input type="text" id="planningJour" name="planningJour" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                               px-4 py-3 text-slate-800 outline-none transition
+                               placeholder:text-slate-400
+                               focus:border-indigo-500 focus:bg-white
+                               focus:ring-2 focus:ring-indigo-500/20">
+                        </div>
+
+                        <div>
+                            <label for="planningHeureDebut" class="mb-2 block text-sm font-semibold text-slate-700">
+                                Heure debut
+                            </label>
+
+                            <input type="text" id="planningHeureDebut" name="planningHeureDebut" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                               px-4 py-3 text-slate-800 outline-none transition
+                               placeholder:text-slate-400
+                               focus:border-indigo-500 focus:bg-white
+                               focus:ring-2 focus:ring-indigo-500/20">
+                        </div>
+
+                        <div>
+                            <label for="planningHeureFin" class="mb-2 block text-sm font-semibold text-slate-700">
+                                Heure fin
+                            </label>
+
+                            <input type="text" id="planningHeureFin" name="planningHeureFin" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                               px-4 py-3 text-slate-800 outline-none transition
+                               placeholder:text-slate-400
+                               focus:border-indigo-500 focus:bg-white
+                               focus:ring-2 focus:ring-indigo-500/20">
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="mt-7 flex justify-end gap-3 border-t border-gray-200 pt-5">
+
+                        <button type="button"
+                            class="rounded-xl border border-slate-300 bg-white  px-5 py-2.5 text-sm font-semibold text-slate-700  transition hover:bg-slate-100">
+                            <a href="/admin/plannings">
+                                Annuler
+                            </a>
+                        </button>
+
+                        <button type="submit"
+                            class="rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm
                                  transition hover:bg-indigo-700 focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer">
-                        Enregistrer
-                    </button>
+                            Enregistrer
+                        </button>
 
-                </div>
+                    </div>
 
-            </form>
+                </form>
 
+            </div>
         </div>
     </div>
 

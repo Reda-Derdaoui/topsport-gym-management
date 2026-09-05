@@ -12,9 +12,16 @@ class AdminTypeActivitiesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $typeActivite = Type_Activite::all()->last()->paginate(3);
+        $search = $request->search;
+
+        $typeActivite = Type_Activite::when($search, function ($query, $search) {
+            $query->where('Libelle', 'like', "%{$search}%");
+        })
+            ->latest()
+            ->paginate(5)
+            ->withQueryString();
 
         return view(
             'admin.adminTypeActivities',

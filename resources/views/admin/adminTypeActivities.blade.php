@@ -136,173 +136,235 @@
                 </div>
             </form>
         </div>
-    </div>
 
-    <div
-        class="max-w-270 overflow-x-auto rounded-2xl border border-[#34383D] bg-[#1B1E21]/50 max-md:rounded-xl mt-6 m-auto">
 
-        <div class="m-4">
+        <div class="flex justify-between mt-4">
+            <div>
 
-            <h3 class="text-lg font-semibold text-[#F8FAFC]
+                <h3 class="text-lg font-semibold text-[#F8FAFC]
                            max-md:text-base
                            max-sm:text-sm">
-                Liste des types activites
-            </h3>
+                    Liste des types activites
+                </h3>
 
-            <p class="mt-1 text-sm text-[#71717A]
+                <p class="mt-1 text-sm text-[#71717A]
                           max-md:text-xs">
-                Les types activites enregistrés apparaîtront ici.
-            </p>
+                    Les types activites enregistrés apparaîtront ici.
+                </p>
+            </div>
+
+            <div class="flex items-center gap-3 mt-4">
+
+                {{-- Search --}}
+                <form method="GET" action="/admin/typeActivities" role="search">
+
+                    <div class="flex items-center w-72 h-11 rounded-lg
+                    bg-white dark:bg-neutral-800
+                    border border-slate-300 dark:border-neutral-700
+                    shadow-sm
+                    focus-within:ring-2 focus-within:ring-blue-500
+                    focus-within:border-blue-500">
+
+                        <label for="search" class="sr-only">Search</label>
+
+                        <input type="search" id="search" name="search" placeholder="Search type activite..."
+                            value="{{ request('search') }}" class="w-full h-full px-4 text-sm
+                       text-slate-900 dark:text-slate-50
+                       bg-transparent outline-none
+                       placeholder:text-slate-400" />
+
+                        <button type="submit" aria-label="Search" class="flex items-center justify-center
+                       w-11 h-11 shrink-0
+                       bg-blue-600 hover:bg-blue-700
+                       rounded-r-lg
+                       transition-colors duration-200
+                       cursor-pointer">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                class="w-5 h-5 fill-none stroke-white stroke-2" aria-hidden="true">
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="m20 20-4-4"></path>
+                            </svg>
+
+                        </button>
+                    </div>
+                </form>
+
+
+                {{-- Cancel --}}
+                @if(request('search'))
+                    <a href="/admin/typeActivities" class="inline-flex items-center justify-center
+                                           h-11 px-4
+                                           text-sm font-medium
+                                           text-slate-700 dark:text-slate-200
+                                           bg-slate-100 dark:bg-neutral-700
+                                           border border-slate-300 dark:border-neutral-600
+                                           rounded-lg
+                                           hover:bg-slate-200 dark:hover:bg-neutral-600
+                                           transition-colors duration-200">
+                        Cancel
+                    </a>
+                @endif
+
+            </div>
+
         </div>
 
-        <table class="w-full min-w-125 table-fixed text-left border-collapse">
 
-            {{-- Header --}}
-            <thead class="border-b border-[#34383D] bg-[#212427]">
-                <tr>
-                    <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
-                           max-lg:px-4 max-lg:py-3
-                           max-md:text-xs">
-                        Nom
-                    </th>
 
-                    <th class="w-[30%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] text-center whitespace-nowrap
-                           max-lg:px-4 max-lg:py-3
-                           max-md:text-xs">
-                        Actions
-                    </th>
-                </tr>
-            </thead>
+        <div
+            class="max-w-270 overflow-x-auto rounded-2xl border border-[#34383D] bg-[#1B1E21]/50 max-md:rounded-xl mt-6 m-auto">
 
-            {{-- Body --}}
-            <tbody class="divide-y divide-[#34383D]">
 
-                @forelse($typeActivities as $type)
+            <table class="w-full min-w-125 table-fixed text-left border-collapse">
 
-                    <tr class="transition-colors duration-200 hover:bg-[#24282C]">
-
-                        {{-- Nom --}}
-                        <td
-                            class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap max-lg:px-4 max-lg:py-3 max-md:text-xs">
-                            {{ $type->Libelle }}
-                        </td>
-
-                        {{-- Actions --}}
-                        <td class="w-[30%] px-6 py-4 max-lg:px-4 max-lg:py-3">
-
-                            <div class="flex items-center justify-center gap-2">
-
-                                {{-- Edit --}}
-                                <button type="button" data-id="{{ $type->id }}"
-                                    class="edit-typeActivite rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
-                                    <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/edit.svg') }}"
-                                        alt="Edit">
-                                </button>
-
-                                {{-- Delete --}}
-                                <form method="POST" action="/admin/typeActivities/{{ $type->id }}"
-                                    onsubmit="return confirm('Are you sure ?')">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit"
-                                        class="rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
-                                        <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/delete.svg') }}"
-                                            alt="Delete">
-                                    </button>
-                                </form>
-
-                            </div>
-
-                        </td>
-                    </tr>
-
-                @empty
-
+                {{-- Header --}}
+                <thead class="border-b border-[#34383D] bg-[#212427]">
                     <tr>
-                        <td colspan="2" class="px-6 py-12 text-center text-sm text-[#71717A]">
-                            Aucun type activité trouvé.
-                        </td>
+                        <th class="w-[70%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                           max-lg:px-4 max-lg:py-3
+                           max-md:text-xs">
+                            Nom
+                        </th>
+
+                        <th class="w-[30%] px-6 py-4 text-sm font-semibold text-[#F8FAFC] text-center whitespace-nowrap
+                           max-lg:px-4 max-lg:py-3
+                           max-md:text-xs">
+                            Actions
+                        </th>
                     </tr>
+                </thead>
 
-                @endforelse
+                {{-- Body --}}
+                <tbody class="divide-y divide-[#34383D]">
 
-            </tbody>
+                    @forelse($typeActivities as $type)
 
-        </table>
+                        <tr class="transition-colors duration-200 hover:bg-[#24282C]">
+
+                            {{-- Nom --}}
+                            <td
+                                class="w-[70%] px-6 py-4 text-sm text-[#F8FAFC] whitespace-nowrap max-lg:px-4 max-lg:py-3 max-md:text-xs">
+                                {{ $type->Libelle }}
+                            </td>
+
+                            {{-- Actions --}}
+                            <td class="w-[30%] px-6 py-4 max-lg:px-4 max-lg:py-3">
+
+                                <div class="flex items-center justify-center gap-2">
+
+                                    {{-- Edit --}}
+                                    <button type="button" data-id="{{ $type->id }}"
+                                        class="edit-typeActivite rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
+                                        <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/edit.svg') }}"
+                                            alt="Edit">
+                                    </button>
+
+                                    {{-- Delete --}}
+                                    <form method="POST" action="/admin/typeActivities/{{ $type->id }}"
+                                        onsubmit="return confirm('Are you sure ?')">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                            class="rounded-lg px-4 py-2  transition-all duration-200 active:scale-95 cursor-pointer max-md:px-3 max-md:py-1.5">
+                                            <img class="h-6 w-6 max-md:h-5 max-md:w-5" src="{{ asset('icons/delete.svg') }}"
+                                                alt="Delete">
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                    @empty
+
+                        <tr>
+                            <td colspan="2" class="px-6 py-12 text-center text-sm text-[#71717A]">
+                                Aucun type activité trouvé.
+                            </td>
+                        </tr>
+
+                    @endforelse
+
+                </tbody>
+
+            </table>
 
 
-        <div id="typeActiviteModal"
-            class="hidden fixed inset-0 z-50 w-full h-full items-center justify-center  bg-slate-950/60 backdrop-blur-md px-4">
-            <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
+            <div id="typeActiviteModal"
+                class="hidden fixed inset-0 z-50 w-full h-full items-center justify-center  bg-slate-950/60 backdrop-blur-md px-4">
+                <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
 
-                <!-- Header -->
-                <div
-                    class="flex items-center justify-between border-b border-gray-200 bg-linear-to-r from-indigo-600 to-indigo-500 px-6 py-5">
+                    <!-- Header -->
+                    <div
+                        class="flex items-center justify-between border-b border-gray-200 bg-linear-to-r from-indigo-600 to-indigo-500 px-6 py-5">
 
-                    <div>
-                        <h2 id="typeActiviteModalTitle" class="text-xl font-bold text-white">
-                            Éditer le type d'activité
-                        </h2>
+                        <div>
+                            <h2 id="typeActiviteModalTitle" class="text-xl font-bold text-white">
+                                Éditer le type d'activité
+                            </h2>
 
-                        <p class="mt-1 text-sm text-indigo-100">
-                            Modifier le type d'activité
-                        </p>
+                            <p class="mt-1 text-sm text-indigo-100">
+                                Modifier le type d'activité
+                            </p>
+                        </div>
+
+                        <button type="button" id="closeTypeActiviteModal"
+                            class="flex h-9 w-9 items-center justify-center rounded-full text-xl text-white cursor-pointer">
+                            &times;
+                        </button>
+
                     </div>
 
-                    <button type="button" id="closeTypeActiviteModal"
-                        class="flex h-9 w-9 items-center justify-center rounded-full text-xl text-white cursor-pointer">
-                        &times;
-                    </button>
 
-                </div>
+                    <!-- Form -->
+                    <form method="POST" id="typeActiviteForm" class="p-6">
 
+                        @csrf
+                        @method('PUT')
 
-                <!-- Form -->
-                <form method="POST" id="typeActiviteForm" class="p-6">
+                        <input type="hidden" id="typId">
 
-                    @csrf
-                    @method('PUT')
+                        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
-                    <input type="hidden" id="typId">
+                            <!-- Nom -->
+                            <div>
+                                <label for="typLibelle" class="mb-2 block text-sm font-semibold text-slate-700">
+                                    Nom
+                                </label>
 
-                    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-
-                        <!-- Nom -->
-                        <div>
-                            <label for="typLibelle" class="mb-2 block text-sm font-semibold text-slate-700">
-                                Nom
-                            </label>
-
-                            <input type="text" id="typLibelle" name="libelle" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                                <input type="text" id="typLibelle" name="libelle" class="w-full rounded-xl border border-slate-300 bg-slate-50
                                px-4 py-3 text-slate-800 outline-none transition
                                placeholder:text-slate-400
                                focus:border-indigo-500 focus:bg-white
                                focus:ring-2 focus:ring-indigo-500/20">
+                            </div>
+
                         </div>
 
-                    </div>
+                        <!-- Buttons -->
+                        <div class="mt-7 flex justify-end gap-3 border-t border-gray-200 pt-5">
 
-                    <!-- Buttons -->
-                    <div class="mt-7 flex justify-end gap-3 border-t border-gray-200 pt-5">
+                            <button type="button"
+                                class="rounded-xl border border-slate-300 bg-white  px-5 py-2.5 text-sm font-semibold text-slate-700  transition hover:bg-slate-100">
+                                <a href="/admin/typeActivities">
+                                    Annuler
+                                </a>
+                            </button>
 
-                        <button type="button"
-                            class="rounded-xl border border-slate-300 bg-white  px-5 py-2.5 text-sm font-semibold text-slate-700  transition hover:bg-slate-100">
-                            <a href="/admin/typeActivities">
-                                Annuler
-                            </a>
-                        </button>
-
-                        <button type="submit"
-                            class="rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm
+                            <button type="submit"
+                                class="rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm
                                  transition hover:bg-indigo-700 focus:outline-none focus:ring-2  focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer">
-                            Enregistrer
-                        </button>
+                                Enregistrer
+                            </button>
 
-                    </div>
+                        </div>
 
-                </form>
+                    </form>
 
+                </div>
             </div>
         </div>
     </div>

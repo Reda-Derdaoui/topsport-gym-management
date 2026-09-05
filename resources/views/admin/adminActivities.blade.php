@@ -23,40 +23,51 @@
             </p>
 
         </div>
+        <div class="w-full
+                    rounded-2xl
+                    border border-[#34383D]
+                    bg-[#212427]
+                    p-6
+                    shadow-xl
 
-        @if (session('success'))
-            <div class="flex items-center justify-between w-full max-w-sm gap-3 px-4 py-3 text-green-400 bg-green-500/10 border border-green-500/30 rounded-lg shadow-sm max-sm:p-2 max-md:max-w-full"
-                role="alert">
-                <span class="text-green-600 font-semibold text-md text-center">
-                    {{ session('success') }}
-                </span>
-                <div class="ml-4 flex items-center">
-                    <button class="inline-flex text-white transition ease-in-out duration-150 cursor-pointer"
-                        onclick="return this.parentNode.parentNode.remove()">
-                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="green">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </button>
+                    max-xl:p-5
+                    max-lg:p-5
+                    max-md:p-4
+                    max-sm:p-3">
+
+            @if (session('success'))
+                <div class="flex items-center justify-between w-full max-w-sm gap-3 px-4 py-3 text-green-400 bg-green-500/10 border border-green-500/30 rounded-lg shadow-sm max-sm:p-2 max-md:max-w-full"
+                    role="alert">
+                    <span class="text-green-600 font-semibold text-md text-center">
+                        {{ session('success') }}
+                    </span>
+                    <div class="ml-4 flex items-center">
+                        <button class="inline-flex text-white transition ease-in-out duration-150 cursor-pointer"
+                            onclick="return this.parentNode.parentNode.remove()">
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="green">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        @endif
+            @endif
 
-        <form action="/admin/activities" method="POST">
-            @csrf
+            <form action="/admin/activities" method="POST">
+                @csrf
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-                {{-- Nom de l'activité --}}
-                <div>
-                    <label for="addLibelle" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
-                        Nom de l'activité
-                    </label>
+                    {{-- Nom de l'activité --}}
+                    <div>
+                        <label for="addLibelle" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                            Nom de l'activité
+                        </label>
 
-                    <input type="text" id="addLibelle" name="nom" value="{{ old('nom') }}" placeholder="Ex: Karate"
-                        required
-                        class="mt-2 block w-full rounded-lg border
+                        <input type="text" id="addLibelle" name="nom" value="{{ old('nom') }}" placeholder="Ex: Karate"
+                            required
+                            class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
                        text-sm text-[#F8FAFC]
@@ -68,22 +79,22 @@
                        max-md:text-xs
                        {{ $errors->has('nom') ? 'border-red-500 focus:border-red-500 focus:ring-red-500/30' : 'border-[#3A3F45] focus:border-indigo-500 focus:ring-indigo-500/30' }}">
 
-                    @if ($errors->has('nom'))
-                        <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
-                            {{ $errors->first('nom') }}
-                        </p>
-                    @endif
-                </div>
+                        @if ($errors->has('nom'))
+                            <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
+                                {{ $errors->first('nom') }}
+                            </p>
+                        @endif
+                    </div>
 
 
-                {{-- Type d'activité --}}
-                <div>
-                    <label for="addType" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
-                        Type d'activité
-                    </label>
+                    {{-- Type d'activité --}}
+                    <div>
+                        <label for="addType" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                            Type d'activité
+                        </label>
 
-                    <select id="addType" name="type" required
-                        class="mt-2 block w-full rounded-lg border
+                        <select id="addType" name="type" required
+                            class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
                        text-sm text-[#F8FAFC]
@@ -93,31 +104,31 @@
                        max-md:py-2
                        max-md:text-xs
                        {{ $errors->has('type') ? 'border-red-500 focus:border-red-500 focus:ring-red-500/30' : 'border-[#3A3F45] focus:border-indigo-500 focus:ring-indigo-500/30' }}">
-                        <option value="">-- Sélectionner un type --</option>
+                            <option value="">-- Sélectionner un type --</option>
 
-                        @foreach($typeActivities as $type)
-                            <option value="{{ $type->id }}" {{ old('type') == $type->Libelle ? 'selected' : '' }}>
-                                {{ $type->Libelle }}
-                            </option>
-                        @endforeach
-                    </select>
+                            @foreach($typeActivities as $type)
+                                <option value="{{ $type->id }}" {{ old('type') == $type->Libelle ? 'selected' : '' }}>
+                                    {{ $type->Libelle }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                    @if ($errors->has('type'))
-                        <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
-                            {{ $errors->first('type') }}
-                        </p>
-                    @endif
-                </div>
+                        @if ($errors->has('type'))
+                            <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
+                                {{ $errors->first('type') }}
+                            </p>
+                        @endif
+                    </div>
 
 
-                {{-- Entraîneur --}}
-                <div>
-                    <label for="addEntraineur" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
-                        Entraîneur
-                    </label>
+                    {{-- Entraîneur --}}
+                    <div>
+                        <label for="addEntraineur" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                            Entraîneur
+                        </label>
 
-                    <select id="addEntraineur" name="entraineur" required
-                        class="mt-2 block w-full rounded-lg border
+                        <select id="addEntraineur" name="entraineur" required
+                            class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
                        text-sm text-[#F8FAFC]
@@ -127,30 +138,30 @@
                        max-md:py-2
                        max-md:text-xs
                        {{ $errors->has('entraineur') ? 'border-red-500 focus:border-red-500 focus:ring-red-500/30' : 'border-[#3A3F45] focus:border-indigo-500 focus:ring-indigo-500/30' }}">
-                        <option value="">-- Sélectionner un entraîneur --</option>
+                            <option value="">-- Sélectionner un entraîneur --</option>
 
-                        @foreach($entraineurs as $entraineur)
-                            <option value="{{ $entraineur->personne->id }}" {{ old('entraineur') == $entraineur->personne->Nom ? 'selected' : '' }}>
-                                {{ $entraineur->personne->Nom }}
-                            </option>
-                        @endforeach
-                    </select>
+                            @foreach($entraineurs as $entraineur)
+                                <option value="{{ $entraineur->personne->id }}" {{ old('entraineur') == $entraineur->personne->Nom ? 'selected' : '' }}>
+                                    {{ $entraineur->personne->Nom }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                    @if ($errors->has('entraineur'))
-                        <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
-                            {{ $errors->first('entraineur') }}
-                        </p>
-                    @endif
-                </div>
+                        @if ($errors->has('entraineur'))
+                            <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
+                                {{ $errors->first('entraineur') }}
+                            </p>
+                        @endif
+                    </div>
 
-                {{-- Planning --}}
-                <div>
-                    <label for="addPlanning" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
-                        Planning
-                    </label>
+                    {{-- Planning --}}
+                    <div>
+                        <label for="addPlanning" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                            Planning
+                        </label>
 
-                    <select name="planning[]" id="addPlanning" multiple
-                        class="mt-2 block w-full rounded-lg border
+                        <select name="planning[]" id="addPlanning" multiple
+                            class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
                        text-sm text-[#F8FAFC]
@@ -160,32 +171,32 @@
                        max-md:py-2
                        max-md:text-xs
                        {{ $errors->has('planning') ? 'border-red-500 focus:border-red-500 focus:ring-red-500/30' : 'border-[#3A3F45] focus:border-indigo-500 focus:ring-indigo-500/30' }}">
-                        @foreach($plannings as $planning)
-                            <option value="{{ $planning->id }}">
-                                {{ ucfirst($planning->jour_semain) }}
-                                — {{ \Carbon\Carbon::parse($planning->heure_debut)->format('H:i') }}
-                                à {{ \Carbon\Carbon::parse($planning->heure_fin)->format('H:i') }}
-                            </option>
-                        @endforeach
-                    </select>
+                            @foreach($plannings as $planning)
+                                <option value="{{ $planning->id }}">
+                                    {{ ucfirst($planning->jour_semain) }}
+                                    — {{ \Carbon\Carbon::parse($planning->heure_debut)->format('H:i') }}
+                                    à {{ \Carbon\Carbon::parse($planning->heure_fin)->format('H:i') }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                    @if ($errors->has('planning'))
-                        <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
-                            {{ $errors->first('planning') }}
+                        @if ($errors->has('planning'))
+                            <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
+                                {{ $errors->first('planning') }}
+                            </p>
+                        @endif
+
+                        <p class="mt-1 text-xs text-gray-500">
+                            Maintenez Ctrl pour sélectionner plusieurs plannings.
                         </p>
-                    @endif
+                    </div>
 
-                    <p class="mt-1 text-xs text-gray-500">
-                        Maintenez Ctrl pour sélectionner plusieurs plannings.
-                    </p>
                 </div>
 
-            </div>
 
-
-            {{-- Bouton --}}
-            <div class="mt-6 flex justify-end">
-                <button type="submit" class="inline-flex items-center justify-center
+                {{-- Bouton --}}
+                <div class="mt-6 flex justify-end">
+                    <button type="submit" class="inline-flex items-center justify-center
                    rounded-lg
                    bg-indigo-500
                    px-6 py-2.5
@@ -203,11 +214,13 @@
                    max-md:py-2.5
                    max-md:text-xs
                    max-sm:w-full">
-                    Ajouter l'activité
-                </button>
-            </div>
+                        Ajouter l'activité
+                    </button>
+                </div>
 
-        </form>
+            </form>
+
+        </div>
 
 
         <div class="mt-10
@@ -215,18 +228,76 @@
                     max-md:mt-7
                     max-sm:mt-6">
 
-            <div class="mb-4">
+            <div class="flex justify-between">
+                <div class="mb-4">
 
-                <h3 class="text-lg font-semibold text-[#F8FAFC]
-                           max-md:text-base
-                           max-sm:text-sm">
-                    Liste des activites
-                </h3>
+                    <h3 class="text-lg font-semibold text-[#F8FAFC]
+                                       max-md:text-base
+                                       max-sm:text-sm">
+                        Liste des activites
+                    </h3>
 
-                <p class="mt-1 text-sm text-[#71717A]
-                          max-md:text-xs">
-                    Les activites enregistrés apparaîtront ici.
-                </p>
+                    <p class="mt-1 text-sm text-[#71717A]
+                                      max-md:text-xs">
+                        Les activites enregistrés apparaîtront ici.
+                    </p>
+
+                </div>
+
+                <div class="flex items-center gap-3 mt-4">
+
+                    {{-- Search --}}
+                    <form method="GET" action="/admin/activities" role="search">
+
+                        <div class="flex items-center w-72 h-11 rounded-lg
+                    bg-white dark:bg-neutral-800
+                    border border-slate-300 dark:border-neutral-700
+                    shadow-sm
+                    focus-within:ring-2 focus-within:ring-blue-500
+                    focus-within:border-blue-500">
+
+                            <label for="search" class="sr-only">Search</label>
+
+                            <input type="search" id="search" name="search" placeholder="Search activite..."
+                                value="{{ request('search') }}" class="w-full h-full px-4 text-sm
+                       text-slate-900 dark:text-slate-50
+                       bg-transparent outline-none
+                       placeholder:text-slate-400" />
+
+                            <button type="submit" aria-label="Search" class="flex items-center justify-center
+                       w-11 h-11 shrink-0
+                       bg-blue-600 hover:bg-blue-700
+                       rounded-r-lg
+                       transition-colors duration-200
+                       cursor-pointer">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    class="w-5 h-5 fill-none stroke-white stroke-2" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <path d="m20 20-4-4"></path>
+                                </svg>
+
+                            </button>
+                        </div>
+                    </form>
+
+
+                    {{-- Cancel --}}
+                    @if(request('search'))
+                        <a href="/admin/activities" class="inline-flex items-center justify-center
+                                                   h-11 px-4
+                                                   text-sm font-medium
+                                                   text-slate-700 dark:text-slate-200
+                                                   bg-slate-100 dark:bg-neutral-700
+                                                   border border-slate-300 dark:border-neutral-600
+                                                   rounded-lg
+                                                   hover:bg-slate-200 dark:hover:bg-neutral-600
+                                                   transition-colors duration-200">
+                            Cancel
+                        </a>
+                    @endif
+
+                </div>
 
             </div>
 

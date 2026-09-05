@@ -17,14 +17,21 @@ class AdminActivitiesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(request $request)
     {
+        $search = $request->search;
+
         $activites = Activite::with([
             'entraineur.personne',
             'admin.personne',
             'type_activite',
             'planning'
-        ])->paginate(3);
+        ])->when($search, function ($query, $search) {
+            $query->where('Libelle', 'like', '%' . $search . '%');
+
+        })->latest()
+            ->paginate(5)
+            ->withQueryString();
 
         $entraineurs = Entraineur::with([
             'personne'

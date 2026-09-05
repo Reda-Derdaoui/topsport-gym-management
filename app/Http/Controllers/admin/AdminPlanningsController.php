@@ -11,9 +11,15 @@ class AdminPlanningsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $palnnings = Planning::all()->last()->paginate(7);
+        $search = $request->search;
+
+        $palnnings = Planning::when($search, function ($query, $search) {
+            $query->where('jour_semain', 'like', '%' . $search . '%');
+
+        })->paginate(5)
+            ->withQueryString();
 
         return view(
             "admin.adminPlannings",
@@ -70,13 +76,13 @@ class AdminPlanningsController extends Controller
     {
         $planning = Planning::find($id);
 
-        
-            $planning->update([
-                'heure_debut' => $request->planningHeureDebut,
-                'heure_fin' => $request->planningHeureFin,
-                'jour_semain' => $request->planningJour
-            ]);
-        
+
+        $planning->update([
+            'heure_debut' => $request->planningHeureDebut,
+            'heure_fin' => $request->planningHeureFin,
+            'jour_semain' => $request->planningJour
+        ]);
+
 
         return redirect('admin/plannings')->with('success', 'Planning modifié avec succès.');
     }
@@ -88,10 +94,10 @@ class AdminPlanningsController extends Controller
     {
         $planning = Planning::find($id);
 
-       
-            $planning->delete();
-        
 
-         return redirect('admin/plannings')->with('success', 'Planning suprimer avec succès.');
+        $planning->delete();
+
+
+        return redirect('admin/plannings')->with('success', 'Planning suprimer avec succès.');
     }
 }

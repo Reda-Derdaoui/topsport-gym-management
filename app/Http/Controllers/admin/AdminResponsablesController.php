@@ -18,15 +18,26 @@ class AdminResponsablesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Responsable::with([
+        $search = $request->search;
+
+        $responsables = Responsable::with([
             'personne',
             'admin.personne'
-        ])->latest()->paginate(5);
+        ])
+            ->when($search, function ($query, $search) {
+                $query->whereHas('personne', function ($q) use ($search) {
+                    $q->where('Nom', 'like', "%{$search}%")
+                        ->orWhere('Prenom', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
+            ->paginate(5)
+            ->withQueryString();
 
         return view('admin.adminResponsables', [
-            'responsables' => $data,
+            'responsables' => $responsables,
             'pageTitle' => 'Admin | Responsables'
         ]);
     }
@@ -75,7 +86,6 @@ class AdminResponsablesController extends Controller
      */
     public function show(string $id)
     {
-        //TODO: Display  the Responsable (GET)
     }
 
     /**

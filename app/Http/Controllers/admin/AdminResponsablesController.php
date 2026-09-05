@@ -118,15 +118,10 @@ class AdminResponsablesController extends Controller
         $responsable = Responsable::findOrFail($id);
         $personne = Personne::findOrFail($responsable->id);
         $user = User::findOrFail($responsable->user_id);
-        if ($user)
-            $user->delete();
 
-        if ($personne)
-            $personne->delete();
-
-        if ($responsable)
-            $responsable->delete();
-
+        $user->delete();
+        $personne->delete();
+        $responsable->delete();
 
         return redirect('admin/responsables')->with('success', 'Responsable suprimer avec succès.');
     }

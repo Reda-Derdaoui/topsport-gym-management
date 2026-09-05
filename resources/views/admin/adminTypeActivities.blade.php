@@ -232,11 +232,6 @@
         </table>
 
 
-        {{-- Pagination --}}
-        <div class="mt-4 flex justify-center">
-            {{ $typeActivities->links() }}
-        </div>
-
         <div id="typeActiviteModal"
             class="hidden fixed inset-0 z-50 w-full h-full items-center justify-center  bg-slate-950/60 backdrop-blur-md px-4">
             <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
@@ -310,5 +305,11 @@
 
             </div>
         </div>
+    </div>
+
+    {{-- Pagination --}}
+    <div class="mt-4 flex justify-center">
+        {{ $typeActivities->links() }}
+    </div>
 
 </x-admin.admin-dashboard-layout>

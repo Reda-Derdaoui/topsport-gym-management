@@ -10,6 +10,7 @@ use App\Models\Planning;
 use App\Models\Type_Activite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AdminActivitiesController extends Controller
 {
@@ -23,7 +24,7 @@ class AdminActivitiesController extends Controller
             'admin.personne',
             'type_activite',
             'planning'
-        ])->get()->last()->paginate(3);
+        ])->paginate(3);
 
         $entraineurs = Entraineur::with([
             'personne'
@@ -84,33 +85,17 @@ class AdminActivitiesController extends Controller
      */
     public function edit(string $id)
     {
-        $activite = Activite::with([
-            'type_activite',
-            'entraineur.personne',
-            'planning'
-        ])->findOrFail($id);
 
-        return response()->json([
-            'id' => $activite->id,
+        $activite = Activite::with(
+            [
+                'entraineur.personne',
+                'admin.personne',
+                'type_activite',
+                'planning'
+            ]
+        )->findOrFail($id);
 
-            'Libelle' => $activite->libelleAct,
-
-            // Type
-            'type_activite_id' => $activite->type_activite_id,
-
-            // Entraîneur
-            'entraineur_id' => $activite->entraineur_id,
-
-            // Planning
-            'planning' => $activite->planning->map(function ($planning) {
-                return [
-                    'id' => $planning->id,
-                    'jour_semain' => $planning->jour_semain,
-                    'heure_debut' => $planning->heure_debut,
-                    'heure_fin' => $planning->heure_fin,
-                ];
-            }),
-        ]);
+        return response()->json($activite);
 
     }
 
@@ -119,10 +104,20 @@ class AdminActivitiesController extends Controller
      */
     public function update(activiteRequest $request, string $id)
     {
+        $request->validate([
+            'nom' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('activites', 'Libelle')->ignore($id),
+            ]
+        ]);
+
+
         $activite = Activite::findOrFail($id);
 
         $activite->update([
-            'Libelle' => $request->libelle,
+            'Libelle' => $request->nom,
             'type_activite_id' => $request->type,
             'entraineur_id' => $request->entraineur,
         ]);
@@ -137,6 +132,10 @@ class AdminActivitiesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $activite = Activite::findOrFail($id);
+        $activite->planning()->detach();
+        $activite->delete();
+
+        return redirect('/admin/activities')->with('success', 'activite suprimer  avec succès.');
     }
 }

@@ -70,13 +70,13 @@ class AdminPlanningsController extends Controller
     {
         $planning = Planning::find($id);
 
-        if ($planning) {
+        
             $planning->update([
                 'heure_debut' => $request->planningHeureDebut,
                 'heure_fin' => $request->planningHeureFin,
                 'jour_semain' => $request->planningJour
             ]);
-        }
+        
 
         return redirect('admin/plannings')->with('success', 'Planning modifié avec succès.');
     }
@@ -88,9 +88,9 @@ class AdminPlanningsController extends Controller
     {
         $planning = Planning::find($id);
 
-        if ($planning) {
+       
             $planning->delete();
-        }
+        
 
          return redirect('admin/plannings')->with('success', 'Planning suprimer avec succès.');
     }

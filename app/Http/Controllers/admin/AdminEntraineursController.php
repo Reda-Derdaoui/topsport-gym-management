@@ -88,7 +88,7 @@ class AdminEntraineursController extends Controller
         $entraineur = Entraineur::findOrFail($id);
         $personne = Personne::findOrFail($entraineur->id);
 
-        if ($personne && $entraineur) {
+         
 
             $personne->update([
                 'Nom' => $request->nom,
@@ -100,7 +100,7 @@ class AdminEntraineursController extends Controller
             $entraineur->update([
                 'Specialite' => $request->specialite
             ]);
-        }
+        
 
         return redirect('admin/entraineurs')->with('success', 'Entraineur modifié avec succès.');
 
@@ -115,10 +115,10 @@ class AdminEntraineursController extends Controller
         $entraineur = Entraineur::findOrFail($id);
         $personne = Personne::findOrFail($entraineur->id);
 
-        if ($entraineur && $personne) {
+         
             $personne->delete();
             $entraineur->delete();
-        }
+        
 
         return redirect('admin/entraineurs')->with('success','Entraineur suprimer avec succès.');
     }

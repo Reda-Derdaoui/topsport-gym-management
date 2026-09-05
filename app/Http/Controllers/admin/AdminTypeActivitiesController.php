@@ -70,12 +70,10 @@ class AdminTypeActivitiesController extends Controller
     {
         $typeActivitie = Type_Activite::find($id);
 
-        if ($typeActivitie) {
-            $typeActivitie->update([
-                'Libelle' => $request->libelle
-            ]);
-        }
 
+        $typeActivitie->update([
+            'Libelle' => $request->libelle
+        ]);
 
         return redirect('admin/typeActivities')->with('success', 'type activite modifié avec succès.');
     }
@@ -87,9 +85,7 @@ class AdminTypeActivitiesController extends Controller
     {
         $typeActivitie = Type_Activite::find($id);
 
-        if ($typeActivitie) {
-            $typeActivitie->delete();
-        }
+        $typeActivitie->delete();
 
         return redirect('admin/typeActivities')->with('success', 'type activite suprimer avec succès.');
     }

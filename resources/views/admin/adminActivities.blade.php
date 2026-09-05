@@ -50,11 +50,12 @@
 
                 {{-- Nom de l'activité --}}
                 <div>
-                    <label for="nom" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                    <label for="addLibelle" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
                         Nom de l'activité
                     </label>
 
-                    <input type="text" id="nom" name="nom" value="{{ old('nom') }}" placeholder="Ex: Karate" required
+                    <input type="text" id="addLibelle" name="nom" value="{{ old('nom') }}" placeholder="Ex: Karate"
+                        required
                         class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
@@ -77,11 +78,11 @@
 
                 {{-- Type d'activité --}}
                 <div>
-                    <label for="type" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                    <label for="addType" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
                         Type d'activité
                     </label>
 
-                    <select id="type" name="type" required
+                    <select id="addType" name="type" required
                         class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
@@ -111,11 +112,11 @@
 
                 {{-- Entraîneur --}}
                 <div>
-                    <label for="entraineur" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                    <label for="addEntraineur" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
                         Entraîneur
                     </label>
 
-                    <select id="entraineur" name="entraineur" required
+                    <select id="addEntraineur" name="entraineur" required
                         class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
@@ -144,11 +145,11 @@
 
                 {{-- Planning --}}
                 <div>
-                    <label for="planning" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
+                    <label for="addPlanning" class="block text-sm font-medium text-[#F8FAFC] max-md:text-xs">
                         Planning
                     </label>
 
-                    <select name="planning[]" id="planning" multiple
+                    <select name="planning[]" id="addPlanning" multiple
                         class="mt-2 block w-full rounded-lg border
                        bg-[#1B1E21]
                        px-3 py-2.5
@@ -328,7 +329,7 @@
 
                                     @if ($activite->entraineur)
 
-                                        {{ $activite->entraineur->personne->Nom }}
+                                        {{ $activite->entraineur->personne->Prenom }}
 
                                     @else
 
@@ -375,7 +376,8 @@
 
 
                                         {{-- Delete --}}
-                                        <form method="POST" action="" onsubmit="return confirm('Are you sure ?')">
+                                        <form method="POST" action="/admin/activities/{{ $activite->id }}"
+                                            onsubmit="return confirm('Are you sure ?')">
 
                                             @csrf
                                             @method('DELETE')
@@ -407,6 +409,7 @@
                 {{ $activites->links() }}
             </div>
 
+            <!-- Modal -->
             <div id="activiteModal" class="hidden fixed inset-0 z-50 w-full h-full items-center justify-center
            bg-slate-950/60 backdrop-blur-md px-4">
 
@@ -447,11 +450,11 @@
                             {{-- Nom --}}
                             <div>
 
-                                <label for="libelle" class="mb-2 block text-sm font-semibold text-slate-700">
+                                <label for="editLibelle" class="mb-2 block text-sm font-semibold text-slate-700">
                                     Nom
                                 </label>
 
-                                <input type="text" id="libelleAct" name="libelleAct" required class="w-full rounded-xl border border-slate-300
+                                <input type="text" id="editLibelle" name="nom" required class="w-full rounded-xl border border-slate-300
                                bg-slate-50 px-4 py-3 text-slate-800
                                outline-none transition
                                placeholder:text-slate-400
@@ -464,13 +467,13 @@
                             {{-- Type activité --}}
                             <div>
 
-                                <label for="type" class="block text-sm font-medium text-slate-700">
+                                <label for="editType" class="block text-sm font-medium text-slate-700">
                                     Type d'activité
                                 </label>
 
-                                <select id="type" name="type" required class="mt-2 block w-full rounded-lg border
-                               bg-[#1B1E21] px-3 py-2.5
-                               text-sm text-[#F8FAFC]
+                                <select id="editType" name="type" required class="mt-2 block w-full rounded-lg border
+                               bg-[#F8FAFC] px-3 py-2.5
+                               text-sm text-[#1B1E21]
                                focus:outline-none focus:ring-2
                                transition-all duration-200
                                border-[#3A3F45]
@@ -497,13 +500,13 @@
                             {{-- Entraîneur --}}
                             <div>
 
-                                <label for="entraineur" class="block text-sm font-medium text-slate-700">
+                                <label for="editEntraineur" class="block text-sm font-medium text-slate-700">
                                     Entraîneur
                                 </label>
 
-                                <select id="entraineur" name="entraineur" required class="mt-2 block w-full rounded-lg border
-                               bg-[#1B1E21] px-3 py-2.5
-                               text-sm text-[#F8FAFC]
+                                <select id="editEntraineur" name="entraineur" required class="mt-2 block w-full rounded-lg border
+                               bg-[#F8FAFC] px-3 py-2.5
+                               text-sm text-[#1B1E21]
                                focus:outline-none focus:ring-2
                                transition-all duration-200
                                border-[#3A3F45]
@@ -517,7 +520,6 @@
                                     @foreach($entraineurs as $entraineur)
 
                                         <option value="{{ $entraineur->id }}">
-                                            {{ $entraineur->personne->Nom }}
                                             {{ $entraineur->personne->Prenom }}
                                         </option>
 
@@ -531,13 +533,13 @@
                             {{-- Planning --}}
                             <div>
 
-                                <label for="planning" class="block text-sm font-medium text-slate-700">
+                                <label for="editPlanning" class="block text-sm font-medium text-slate-700">
                                     Planning
                                 </label>
 
-                                <select name="planning[]" id="planning" multiple required class="mt-2 block w-full rounded-lg border
-                               bg-[#1B1E21] px-3 py-2.5
-                               text-sm text-[#F8FAFC]
+                                <select name="planning[]" id="editPlanning" multiple required class="mt-2 block w-full rounded-lg border
+                               bg-[#F8FAFC] px-3 py-2.5
+                               text-sm text-[#1B1E21]
                                focus:outline-none focus:ring-2
                                transition-all duration-200
                                border-[#3A3F45]
@@ -560,7 +562,7 @@
 
                                 </select>
 
-                                <p class="mt-1 text-xs text-slate-500">
+                                <p class="mt-1 text-xs text-[#1B1E21]">
                                     Maintenez Ctrl pour sélectionner plusieurs plannings.
                                 </p>
 
@@ -585,7 +587,6 @@
                             </button>
 
                         </div>
-
 
                     </form>
 

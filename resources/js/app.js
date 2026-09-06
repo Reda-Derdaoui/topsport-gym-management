@@ -4,6 +4,7 @@ import "./admin/adminTypeActivite";
 import "./admin/adminTypeAbonnement";
 import "./admin/adminPlanning";
 import "./admin/adminActivite";
+import "./responsable/responsableAdherents";
 
 const items = document.querySelectorAll(".sidebar-link");
 document.addEventListener("DOMContentLoaded", function () {

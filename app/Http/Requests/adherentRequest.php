@@ -23,7 +23,10 @@ class adherentRequest extends FormRequest
                 ->where('Tele', $this->tele)
                 ->where('DateNaissance', $this->date)
                 ->whereHas('adherent', function ($query) use ($responsable) {
-                    $query->where('responsable_id', $responsable->id);
+                    $query->where('responsable_id', $responsable->id)
+                        ->when($this->route('adherent'), function ($query, $adherentId) {
+                            $query->where('id', '!=', $adherentId);
+                        });
                 })
                 ->exists();
 

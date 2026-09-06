@@ -129,7 +129,50 @@ class ResponsableAdherentController extends Controller
      */
     public function update(adherentRequest $request, string $id)
     {
-        //
+        $responsable = Auth::user()->responsable;
+
+        DB::transaction(function () use ($request, $id, $responsable) {
+            $adherent = Adherent::with(['personne', 'abonnement'])
+                ->where('responsable_id', $responsable->id)
+                ->findOrFail($id);
+
+            $adherent->personne->update([
+                'Nom' => $request->nom,
+                'Prenom' => $request->prenom,
+                'Tele' => $request->tele,
+                'DateNaissance' => $request->date,
+            ]);
+
+            $adherent->update([
+                'Assurance' => $request->prixAssurance,
+            ]);
+
+            $type = Type_Abonnement::findOrFail($request->typeAbon);
+            $dateDebut = Carbon::parse($request->dateDebut);
+
+            $dateFin = match (strtolower($type->Libelle)) {
+                'mensuel' => $dateDebut->copy()->addMonth(),
+                'trimestriel' => $dateDebut->copy()->addMonths(3),
+                'annuel' => $dateDebut->copy()->addYear(),
+                default => null,
+            };
+
+            $abonnement = $adherent->abonnement->first();
+            if ($abonnement) {
+                $abonnement->update([
+                    'typeAbonnement_id' => $request->typeAbon,
+                    'DateDebut' => $dateDebut,
+                    'DateFin' => $dateFin,
+                    'Prix' => $request->prixAbonnement,
+                ]);
+            }
+
+            $adherent->activite()->sync([$request->activite]);
+        });
+
+        return redirect()
+            ->to('/responsable/listeAdherents')
+            ->with('success', 'Adhérent modifié avec succès.');
     }
 
     /**
@@ -137,6 +180,17 @@ class ResponsableAdherentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $responsable = Auth::user()->responsable;
+
+        DB::transaction(function () use ($id, $responsable) {
+            $adherent = Adherent::where('responsable_id', $responsable->id)
+                ->findOrFail($id);
+
+            Personne::whereKey($adherent->getKey())->delete();
+        });
+
+        return redirect()
+            ->to('/responsable/listeAdherents')
+            ->with('success', 'Adhérent supprimé avec succès.');
     }
 }

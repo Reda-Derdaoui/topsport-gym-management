@@ -8,6 +8,10 @@ class Admin extends Model
 {
     protected $table = "Admin";
 
+    public $incrementing = false;
+
+
+    protected $keyType = 'int';
 
     protected $fillable = [
         'id',
@@ -38,7 +42,8 @@ class Admin extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function activitie() {
+    public function activitie()
+    {
         return $this->hasMany(Activite::class);
     }
 }

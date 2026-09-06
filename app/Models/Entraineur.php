@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Entraineur extends Model
 {
     protected $table = "Entraineurs";
+    public $incrementing = false;
 
+    protected $keyType = 'int';
 
     protected $fillable = [
         "id",

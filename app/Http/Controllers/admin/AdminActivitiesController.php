@@ -43,7 +43,7 @@ class AdminActivitiesController extends Controller
         return view(
             'admin.adminActivities',
             [
-                'pageTitle' => 'Admin |Activities',
+                'pageTitle' => 'Admin | Activities',
                 'entraineurs' => $entraineurs,
                 'typeActivities' => $types,
                 'plannings' => $plannings,
@@ -129,7 +129,7 @@ class AdminActivitiesController extends Controller
             'entraineur_id' => $request->entraineur,
         ]);
 
-        $activite->planning()->sync($request->planning);
+        $activite->planning()->sync([$request->planning]);
 
         return redirect('/admin/activities')->with('success', 'activite modifiée  avec succès.');
     }

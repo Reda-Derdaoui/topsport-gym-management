@@ -8,6 +8,10 @@ class Responsable extends Model
 {
     protected $table = "Responsables";
 
+    public $incrementing = false;
+
+      protected $keyType = 'int';
+
     protected $fillable = [
         'id',
         'admin_id',

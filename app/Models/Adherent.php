@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Adherent extends Model
 {
     protected $table = "Adherents";
+    public $incrementing = false;
+    protected $keyType = 'int';
 
     protected $fillable = [
-        'Assurance',
-        'responsable_id'
+        'id',
+        'responsable_id',
+        'Assurance'
     ];
 
     protected $guarded = [

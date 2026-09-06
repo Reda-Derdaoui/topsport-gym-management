@@ -30,7 +30,6 @@ Route::middleware(['auth', 'nocache'])->group(function () {
     Route::Resource('/admin/typeAbonnements', AdminTypeAbonnementController::class)->names('admin.typeAbonnements');
 
     //Responsable
-    Route::get('/responsable/dashboard', [ResponsableDashboardController::class, 'index']);
     Route::get('/responsable/listeAdherents', [ResponsableListeAdherentController::class, 'index']);
     Route::Resource('/responsable/adherents', ResponsableAdherentController::class)->names('responsable.adherents');
 

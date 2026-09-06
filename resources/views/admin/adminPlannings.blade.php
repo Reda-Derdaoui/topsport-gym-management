@@ -177,32 +177,22 @@
                 </p>
             </div>
 
-            <div class="flex items-center gap-3 mt-4">
+            <div class="flex flex-wrap items-center gap-3 mt-4 max-sm:flex-col max-sm:items-stretch">
 
                 {{-- Search --}}
-                <form method="GET" action="/admin/plannings" role="search">
+                <form method="GET" action="/admin/plannings" role="search" class="flex-1 min-w-0 max-sm:w-full">
 
-                    <div class="flex items-center w-72 h-11 rounded-lg
-                    bg-white dark:bg-neutral-800
-                    border border-slate-300 dark:border-neutral-700
-                    shadow-sm
-                    focus-within:ring-2 focus-within:ring-blue-500
-                    focus-within:border-blue-500">
+                    <div
+                        class="flex items-center w-72 max-md:w-64 max-sm:w-full h-11 rounded-lg  bg-white dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 shadow-sm  focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
 
                         <label for="search" class="sr-only">Search</label>
 
                         <input type="search" id="search" name="search" placeholder="Search activite..."
-                            value="{{ request('search') }}" class="w-full h-full px-4 text-sm
-                       text-slate-900 dark:text-slate-50
-                       bg-transparent outline-none
-                       placeholder:text-slate-400" />
+                            value="{{ request('search') }}"
+                            class="block w-full rounded-lg border-0  bg-[#1B1E21] px-3 py-2.5 text-sm text-[#F8FAFC] placeholder:text-[#71717A]  focus:outline-none focus:ring-0  transition-all duration-200  max-md:px-2.5  max-md:py-2  max-md:text-xs" />
 
-                        <button type="submit" aria-label="Search" class="flex items-center justify-center
-                       w-11 h-11 shrink-0
-                       bg-blue-600 hover:bg-blue-700
-                       rounded-r-lg
-                       transition-colors duration-200
-                       cursor-pointer">
+                        <button type="submit" aria-label="Search"
+                            class="inline-flex items-center justify-center rounded-lg bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-indigo-400 hover:shadow-lg hover:shadow-indigo-500/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-[#212427] active:scale-[0.98] cursor-pointer shrink-0 max-md:px-3 max-md:py-2 max-md:text-xs">
 
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                 class="w-5 h-5 fill-none stroke-white stroke-2" aria-hidden="true">
@@ -217,15 +207,8 @@
 
                 {{-- Cancel --}}
                 @if(request('search'))
-                    <a href="/admin/plannings" class="inline-flex items-center justify-center
-                                                       h-11 px-4
-                                                       text-sm font-medium
-                                                       text-slate-700 dark:text-slate-200
-                                                       bg-slate-100 dark:bg-neutral-700
-                                                       border border-slate-300 dark:border-neutral-600
-                                                       rounded-lg
-                                                       hover:bg-slate-200 dark:hover:bg-neutral-600
-                                                       transition-colors duration-200">
+                    <a href="/admin/plannings"
+                        class="inline-flex items-center justify-center  h-11 px-4   text-sm font-medium   text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-neutral-700 border border-slate-300 dark:border-neutral-600 rounded-lg   hover:bg-slate-200 dark:hover:bg-neutral-600 transition-colors duration-200 shrink-0 max-sm:w-full max-sm:h-10">
                         Cancel
                     </a>
                 @endif

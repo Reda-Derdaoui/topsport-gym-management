@@ -14,12 +14,12 @@
                        max-lg:text-xl
                        max-md:text-lg
                        max-sm:text-base">
-                Gestion des Type activité
+                Gestion des Type abonnements
             </h2>
 
             <p class="mt-1 text-sm text-[#A1A1AA]
                       max-md:text-xs">
-                Ajoutez et gérez les Type activités de votre salle de sport.
+                Ajoutez et gérez les Type abonnements de votre salle de sport.
             </p>
 
         </div>
@@ -50,7 +50,7 @@
 
                 <p class="mt-1 text-sm text-[#71717A]
                           max-md:text-xs">
-                    Renseignez les informations du nouveau Type activité.
+                    Renseignez les informations du nouveau Type abonnements.
                 </p>
 
             </div>
@@ -73,7 +73,7 @@
                 </div>
             @endif
 
-            <form action="/admin/typeActivities" method="POST">
+            <form action="/admin/typeAbonnements" method="POST">
                 @csrf
 
                 {{-- Type activite --}}
@@ -156,7 +156,7 @@
             <div class="flex flex-wrap items-center gap-3 mt-4 max-sm:flex-col max-sm:items-stretch">
 
                 {{-- Search --}}
-                <form method="GET" action="/admin/typeActivities" role="search" class="flex-1 min-w-0 max-sm:w-full">
+                <form method="GET" action="/admin/typeAbonnements" role="search" class="flex-1 min-w-0 max-sm:w-full">
 
                     <div
                         class="flex items-center w-72 max-md:w-64 max-sm:w-full h-11 rounded-lg  bg-white dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 shadow-sm  focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
@@ -183,7 +183,7 @@
 
                 {{-- Cancel --}}
                 @if(request('search'))
-                    <a href="/admin/typeActivities"
+                    <a href="/admin/typeAbonnements"
                         class="inline-flex items-center justify-center  h-11 px-4   text-sm font-medium   text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-neutral-700 border border-slate-300 dark:border-neutral-600 rounded-lg   hover:bg-slate-200 dark:hover:bg-neutral-600 transition-colors duration-200 shrink-0 max-sm:w-full max-sm:h-10">
                         Cancel
                     </a>
@@ -221,7 +221,7 @@
                 {{-- Body --}}
                 <tbody class="divide-y divide-[#34383D]">
 
-                    @forelse($typeActivities as $type)
+                    @forelse($typeAbonnements as $type)
 
                         <tr class="transition-colors duration-200 hover:bg-[#24282C]">
 
@@ -244,7 +244,7 @@
                                     </button>
 
                                     {{-- Delete --}}
-                                    <form method="POST" action="/admin/typeActivities/{{ $type->id }}"
+                                    <form method="POST" action="/admin/typeAbonnements/{{ $type->id }}"
                                         onsubmit="return confirm('Are you sure ?')">
                                         @csrf
                                         @method('DELETE')
@@ -276,7 +276,7 @@
             </table>
 
 
-            <div id="typeActiviteModal"
+            <div id="typeAbonnementModal"
                 class="hidden fixed inset-0 z-50 w-full h-full items-center justify-center  bg-slate-950/60 backdrop-blur-md px-4">
                 <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
 
@@ -285,7 +285,7 @@
                         class="flex items-center justify-between border-b border-gray-200 bg-linear-to-r from-indigo-600 to-indigo-500 px-6 py-5">
 
                         <div>
-                            <h2 id="typeActiviteModalTitle" class="text-xl font-bold text-white">
+                            <h2 id="typeAbonnementModalTitle" class="text-xl font-bold text-white">
                                 Éditer le type d'activité
                             </h2>
 
@@ -294,7 +294,7 @@
                             </p>
                         </div>
 
-                        <button type="button" id="closeTypeActiviteModal"
+                        <button type="button" id="closeTypeAbonnementModal"
                             class="flex h-9 w-9 items-center justify-center rounded-full text-xl text-white cursor-pointer">
                             &times;
                         </button>
@@ -303,22 +303,22 @@
 
 
                     <!-- Form -->
-                    <form method="POST" id="typeActiviteForm" class="p-6">
+                    <form method="POST" id="typeAbonnementForm" class="p-6">
 
                         @csrf
                         @method('PUT')
 
-                        <input type="hidden" id="typId">
+                        <input type="hidden" id="typAbId">
 
                         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
                             <!-- Nom -->
                             <div>
-                                <label for="typLibelle" class="mb-2 block text-sm font-semibold text-slate-700">
+                                <label for="typAbLibelle" class="mb-2 block text-sm font-semibold text-slate-700">
                                     Nom
                                 </label>
 
-                                <input type="text" id="typLibelle" name="libelle" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                                <input type="text" id="typAbLibelle" name="libelle" class="w-full rounded-xl border border-slate-300 bg-slate-50
                                px-4 py-3 text-slate-800 outline-none transition
                                placeholder:text-slate-400
                                focus:border-indigo-500 focus:bg-white
@@ -332,7 +332,7 @@
 
                             <button type="button"
                                 class="rounded-xl border border-slate-300 bg-white  px-5 py-2.5 text-sm font-semibold text-slate-700  transition hover:bg-slate-100">
-                                <a href="/admin/typeActivities">
+                                <a href="/admin/typeAbonnements">
                                     Annuler
                                 </a>
                             </button>
@@ -354,7 +354,7 @@
 
     {{-- Pagination --}}
     <div class="mt-4 flex justify-center">
-        {{ $typeActivities->links() }}
+        {{ $typeAbonnements->links() }}
     </div>
 
 </x-admin.admin-dashboard-layout>

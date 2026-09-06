@@ -1,9 +1,9 @@
 import "./admin/adminEntraineur";
 import "./admin/adminResponsable";
 import "./admin/adminTypeActivite";
+import "./admin/adminTypeAbonnement";
 import "./admin/adminPlanning";
 import "./admin/adminActivite";
-
 
 const items = document.querySelectorAll(".sidebar-link");
 document.addEventListener("DOMContentLoaded", function () {

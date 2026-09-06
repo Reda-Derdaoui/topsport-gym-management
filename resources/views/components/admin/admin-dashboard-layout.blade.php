@@ -122,6 +122,15 @@
 
                 </x-admin.admin-dashboard-links-layout>
 
+                {{-- Type abonnement --}}
+                <x-admin.admin-dashboard-links-layout href="typeAbonnements" icon="category.svg"
+                    :activite="request()->is('admin/typeAbonnements')">
+
+                    Type abonnement
+
+                </x-admin.admin-dashboard-links-layout>
+
+
 
                 {{-- Plannings --}}
                 <x-admin.admin-dashboard-links-layout href="plannings" icon="planning.svg"

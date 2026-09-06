@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\AdminEntraineursController;
 use App\Http\Controllers\admin\AdminPlanningsController;
 use App\Http\Controllers\admin\AdminResponsablesController;
+use App\Http\Controllers\admin\AdminTypeAbonnementController;
 use App\Http\Controllers\admin\AdminTypeActivitiesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -24,6 +25,7 @@ Route::middleware(['auth', 'nocache'])->group(function () {
     Route::Resource('/admin/activities', AdminActivitiesController::class);
     Route::Resource('/admin/plannings', AdminPlanningsController::class);
     Route::Resource('/admin/typeActivities', AdminTypeActivitiesController::class);
+    Route::Resource('/admin/typeAbonnements', AdminTypeAbonnementController::class);
 
     //Responsable
     Route::get('/responsable/dashboard', [ResponsableDashboardController::class, 'index']);

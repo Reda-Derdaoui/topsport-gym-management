@@ -4,6 +4,7 @@ import "./admin/adminTypeActivite";
 import "./admin/adminTypeAbonnement";
 import "./admin/adminPlanning";
 import "./admin/adminActivite";
+import "./admin/adminAdherents";
 import "./admin/adminDashboard";
 import "./responsable/responsableAdherents";
 

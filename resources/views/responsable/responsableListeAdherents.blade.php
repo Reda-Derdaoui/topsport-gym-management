@@ -203,7 +203,7 @@
                 <div class="relative z-10 max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#34383D] bg-[#212427] p-6 shadow-2xl max-md:p-4"
                     role="dialog" aria-modal="true" aria-labelledby="show-adherent-title">
                     <button type="button" data-show-modal-close aria-label="Fermer"
-                        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-lg text-2xl text-[#A1A1AA] hover:bg-[#34383D] hover:text-white">&times;</button>
+                        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-lg text-2xl text-[#A1A1AA] hover:bg-[#34383D] hover:text-white cursor-pointer">&times;</button>
 
                     <div class="mb-6 text-center">
                         <img src="{{ asset('icons/top-sport.png') }}" alt="Top Sport"

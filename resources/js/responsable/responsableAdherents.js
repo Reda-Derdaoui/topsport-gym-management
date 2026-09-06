@@ -63,7 +63,7 @@ if (showModal) {
         date: "date",
         assurance: "assurance",
         responsable: "responsable",
-        "type-abonnement": "typeAbonnement",
+        "type-abonnement": "typeLabel",
         "prix-abonnement": "prixAbonnement",
         "date-debut": "dateDebut",
         "date-fin": "dateFin",

@@ -69,6 +69,15 @@
                     </div>
 
                 </div>
+
+                {{-- Dashboard --}}
+                <x-admin.admin-dashboard-links-layout href="dashboard" icon="dashboard.svg"
+                    :activite="request()->is('responsable/dashboard')">
+
+                    Dashboard
+
+                </x-admin.admin-dashboard-links-layout>
+
                 {{-- Adherents --}}
                 <x-admin.admin-dashboard-links-layout href="listeAdherents" icon="person.svg"
                     :activite="request()->is('responsable/listeAdherents')">

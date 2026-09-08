@@ -1,7 +1,7 @@
 <x-simple-layout>
     <div class="flex flex-col justify-center  px-5 py-10  items-center h-screen">
         <div class="flex flex-col gap-5 items-center">
-            <img src="{{ asset('build/assets/icons/top-sport.png') }}" alt="Top Sport" class="mx-auto h-15 w-auto" />
+            <img src="{{ asset('icons/top-sport.png') }}" alt="Top Sport" class="mx-auto h-15 w-auto" />
             <h2 class=" text-center text-2xl font-bold tracking-tight text-[#F8FAFC]">Créez votre compte</h2>
         </div>
 

@@ -74,7 +74,7 @@ class AuthController extends Controller
 
             if ($user->responsable) {
                 $request->session()->regenerate();
-                return redirect('/responsable/listeAdherents');
+                return redirect('/responsable/dashboard');
             }
 
             return back()->withErrors([

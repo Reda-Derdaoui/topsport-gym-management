@@ -1,5 +1,6 @@
 <x-admin.admin-dashboard-layout :title="$pageTitle">
-    <div class="w-full max-w-6xl mx-auto
+    <div
+        class="w-full max-w-6xl mx-auto
                 px-6 py-6
                 max-2xl:px-5
                 max-xl:px-5
@@ -10,7 +11,8 @@
         {{-- Header --}}
         <div class="mb-6 max-lg:mb-5 max-md:mb-4">
 
-            <h2 class="text-2xl font-semibold text-[#F8FAFC]
+            <h2
+                class="text-2xl font-semibold text-[#F8FAFC]
                        max-lg:text-xl
                        max-md:text-lg
                        max-sm:text-base">
@@ -26,7 +28,8 @@
 
 
         {{-- Add Responsable --}}
-        <div class="w-full
+        <div
+            class="w-full
                     rounded-2xl
                     border border-[#34383D]
                     bg-[#212427]
@@ -42,7 +45,8 @@
                         max-lg:mb-5
                         max-md:mb-4">
 
-                <h3 class="text-lg font-semibold text-[#F8FAFC]
+                <h3
+                    class="text-lg font-semibold text-[#F8FAFC]
                            max-md:text-base
                            max-sm:text-sm">
                     Ajouter un entraineur
@@ -114,13 +118,15 @@
                         {{-- Prénom --}}
                         <div>
 
-                            <label for="prenom" class="block text-sm font-medium text-[#F8FAFC]
+                            <label for="prenom"
+                                class="block text-sm font-medium text-[#F8FAFC]
                                        max-md:text-xs">
                                 Prénom
                             </label>
 
                             <input id="prenom" type="text" name="prenom" required autocomplete="given-name"
-                                value="{{ old('prenom') }}" class="mt-2 block w-full rounded-lg border
+                                value="{{ old('prenom') }}"
+                                class="mt-2 block w-full rounded-lg border
                                        bg-[#1B1E21]
                                        px-3 py-2.5
                                        text-sm text-[#F8FAFC]
@@ -131,8 +137,7 @@
                                        max-md:py-2
                                        max-md:text-xs
 
-                                       {{ $errors->has('prenom') ? 'border-red-500 focus:border-red-500 focus:ring-red-500/30' : 'border-[#3A3F45] focus:border-indigo-500 focus:ring-indigo-500/30'
-                                       }}">
+                                       {{ $errors->has('prenom') ? 'border-red-500 focus:border-red-500 focus:ring-red-500/30' : 'border-[#3A3F45] focus:border-indigo-500 focus:ring-indigo-500/30' }}">
 
                             @if ($errors->has('prenom'))
                                 <p class="mt-1.5 text-xs text-red-400 max-md:text-[11px]">
@@ -146,7 +151,8 @@
                         {{-- Téléphone --}}
                         <div>
 
-                            <label for="tele" class="block text-sm font-medium text-[#F8FAFC]
+                            <label for="tele"
+                                class="block text-sm font-medium text-[#F8FAFC]
                                        max-md:text-xs">
                                 Téléphone
                             </label>
@@ -178,7 +184,8 @@
                         {{-- Date --}}
                         <div>
 
-                            <label for="date" class="block text-sm font-medium text-[#F8FAFC]
+                            <label for="date"
+                                class="block text-sm font-medium text-[#F8FAFC]
                                        max-md:text-xs">
                                 Date de naissance
                             </label>
@@ -209,7 +216,8 @@
 
                         <div>
 
-                            <label for="date" class="block text-sm font-medium text-[#F8FAFC]
+                            <label for="date"
+                                class="block text-sm font-medium text-[#F8FAFC]
                                        max-md:text-xs">
                                 Specialite
                             </label>
@@ -240,12 +248,14 @@
                     </div>
                 </div>
                 {{-- Submit --}}
-                <div class="mt-8 flex justify-end
+                <div
+                    class="mt-8 flex justify-end
                             max-md:mt-6
                             max-sm:mt-5
                             max-sm:w-full">
 
-                    <button type="submit" class="inline-flex items-center justify-center
+                    <button type="submit"
+                        class="inline-flex items-center justify-center
                                rounded-lg
                                bg-indigo-500
                                px-6 py-2.5
@@ -296,7 +306,8 @@
                 <div class="flex flex-wrap items-center gap-3 mt-4 max-sm:flex-col max-sm:items-stretch">
 
                     {{-- Search --}}
-                    <form method="GET" action="/admin/entraineurs" role="search" class="flex-1 min-w-0 max-sm:w-full">
+                    <form method="GET" action="/admin/entraineurs" role="search"
+                        class="flex-1 min-w-0 max-sm:w-full">
 
                         <div
                             class="flex items-center w-72 max-md:w-64 max-sm:w-full h-11 rounded-lg  bg-white dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 shadow-sm  focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
@@ -322,7 +333,7 @@
 
 
                     {{-- Cancel --}}
-                    @if(request('search'))
+                    @if (request('search'))
                         <a href="/admin/entraineurs"
                             class="inline-flex items-center justify-center  h-11 px-4   text-sm font-medium   text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-neutral-700 border border-slate-300 dark:border-neutral-600 rounded-lg   hover:bg-slate-200 dark:hover:bg-neutral-600 transition-colors duration-200 shrink-0 max-sm:w-full max-sm:h-10">
                             Cancel
@@ -341,44 +352,51 @@
                     {{-- Header --}}
                     <thead class="border-b border-[#34383D] bg-[#212427]">
                         <tr>
-                            <th class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                            <th
+                                class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
                            max-lg:px-4 max-lg:py-3
                            max-md:text-xs">
                                 Nom
                             </th>
 
-                            <th class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                            <th
+                                class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
                            max-lg:px-4 max-lg:py-3
                            max-md:text-xs">
                                 Prenom
                             </th>
 
-                            <th class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                            <th
+                                class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
                            max-lg:px-4 max-lg:py-3
                            max-md:text-xs">
                                 Telephone
                             </th>
 
-                            <th class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                            <th
+                                class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
                            max-lg:px-4 max-lg:py-3
                            max-md:text-xs">
                                 Date naissance
                             </th>
 
-                            <th class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                            <th
+                                class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
                            max-lg:px-4 max-lg:py-3
                            max-md:text-xs">
                                 Specialite
                             </th>
 
-                            <th class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
+                            <th
+                                class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] whitespace-nowrap
                            max-lg:px-4 max-lg:py-3
                            max-md:text-xs">
                                 Admin
                             </th>
 
 
-                            <th class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] text-center whitespace-nowrap
+                            <th
+                                class="px-6 py-4 text-sm font-semibold text-[#F8FAFC] text-center whitespace-nowrap
                            max-lg:px-4 max-lg:py-3
                            max-md:text-xs">
                                 Actions
@@ -390,7 +408,6 @@
                     <tbody class="divide-y divide-[#34383D]">
 
                         @forelse ($entraineurs as $entraineur)
-
                             <tr class="transition-colors duration-200 hover:bg-[#24282C]">
 
                                 <td
@@ -510,7 +527,8 @@
                                     Nom
                                 </label>
 
-                                <input type="text" id="entNom" name="nom" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                                <input type="text" id="entNom" name="nom"
+                                    class="w-full rounded-xl border border-slate-300 bg-slate-50
                                px-4 py-3 text-slate-800 outline-none transition
                                placeholder:text-slate-400
                                focus:border-indigo-500 focus:bg-white
@@ -524,7 +542,8 @@
                                     Prénom
                                 </label>
 
-                                <input type="text" id="entPrenom" name="prenom" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                                <input type="text" id="entPrenom" name="prenom"
+                                    class="w-full rounded-xl border border-slate-300 bg-slate-50
                                px-4 py-3 text-slate-800 outline-none transition
                                focus:border-indigo-500 focus:bg-white
                                focus:ring-2 focus:ring-indigo-500/20">
@@ -537,7 +556,8 @@
                                     Téléphone
                                 </label>
 
-                                <input type="text" id="entPhone" name="tele" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                                <input type="text" id="entPhone" name="tele"
+                                    class="w-full rounded-xl border border-slate-300 bg-slate-50
                                px-4 py-3 text-slate-800 outline-none transition
                                focus:border-indigo-500 focus:bg-white
                                focus:ring-2 focus:ring-indigo-500/20">
@@ -550,7 +570,8 @@
                                     Date de naissance
                                 </label>
 
-                                <input type="date" id="entDateNaissance" name="date" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                                <input type="date" id="entDateNaissance" name="date"
+                                    class="w-full rounded-xl border border-slate-300 bg-slate-50
                                px-4 py-3 text-slate-800 outline-none transition
                                focus:border-indigo-500 focus:bg-white
                                focus:ring-2 focus:ring-indigo-500/20">
@@ -561,7 +582,8 @@
                                     Specialite
                                 </label>
 
-                                <input type="text" id="entSpecialite" name="specialite" class="w-full rounded-xl border border-slate-300 bg-slate-50
+                                <input type="text" id="entSpecialite" name="specialite"
+                                    class="w-full rounded-xl border border-slate-300 bg-slate-50
                                px-4 py-3 text-slate-800 outline-none transition
                                focus:border-indigo-500 focus:bg-white
                                focus:ring-2 focus:ring-indigo-500/20">

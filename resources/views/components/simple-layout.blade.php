@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Sign Up' }}</title>
 
+    <link rel="icon" type="image/png" href="{{ asset('icons/top-sport.png') }}">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-[#212427]">
 
     <main>
-        {{$slot}}
+        {{ $slot }}
     </main>
 
 </body>

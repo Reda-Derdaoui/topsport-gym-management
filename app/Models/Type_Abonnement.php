@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type_Abonnement extends Model
 {
-    protected $table = "Type_Abonnement";
+    protected $table = "type_abonnement";
 
     protected $fillable = [
         "Libelle"

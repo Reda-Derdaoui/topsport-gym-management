@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entraineur extends Model
 {
-    protected $table = "Entraineurs";
+    protected $table = "entraineurs";
     public $incrementing = false;
 
     protected $keyType = 'int';

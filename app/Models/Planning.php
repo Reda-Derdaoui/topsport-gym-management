@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Planning extends Model
 {
-    protected $table = "Plannings";
+    protected $table = "plannings";
 
     protected $fillable = [
         "heure_debut",

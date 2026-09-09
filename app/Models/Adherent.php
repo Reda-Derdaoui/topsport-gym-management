@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Adherent extends Model
 {
-    protected $table = "Adherents";
+    protected $table = "adherents";
     public $incrementing = false;
     protected $keyType = 'int';
 

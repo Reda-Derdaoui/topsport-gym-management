@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Responsable extends Model
 {
-    protected $table = "Responsables";
+    protected $table = "responsables";
 
     public $incrementing = false;
 
